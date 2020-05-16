@@ -67,7 +67,7 @@ export const Header = ({ selected, clearCart }) =>  {
               disabled={shouldDisableCartAccess}
               variant="outlined"
               className={classes.cart}
-              onClick={() => clearCart()}
+              onClick={clearCart}
             >
               <b className={classes.counter}>X</b>
             </Button>

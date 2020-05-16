@@ -1,4 +1,5 @@
-import { screen, fireEvent } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import userEvent from "@testing-library/user-event";
 import { renderRoutingComponent } from '../../../utils/tests';
 import { Header } from './Header';
 
@@ -8,23 +9,34 @@ describe('Header component', () => {
     clearCart: jest.fn()
   }
 
-  test('should display the correct number of selected items', () => {
-    renderRoutingComponent(Header, baseProps);
+  describe('when no selected elements are provided', () => {
+    test('should display the correct number of selected items', () => {
+      renderRoutingComponent(Header, baseProps);
+  
+      const counterElement = screen.getByText('0');
+  
+      expect(counterElement).toBeInTheDocument();
+    });
 
-    const counterElement = screen.getByText('0');
-
-    expect(counterElement).toBeInTheDocument();
+    test('should not call clearCart function when "Clear Cart" button is clicked', () => {
+      renderRoutingComponent(Header, baseProps);
+  
+      userEvent.click(screen.getByText('X').closest('button'));
+  
+      expect(baseProps.clearCart).toBeCalledTimes(0);
+    });
   });
 
-  test('should call clearCart function when "Clear Cart" button is clicked', () => {
-    renderRoutingComponent(Header, baseProps);
-
-    const button = screen.getByRole('button', { name: 'X' });
-
-    console.log(button);
-
-    fireEvent.click(button);
-
-    expect(baseProps.clearCart).toBeCalledTimes(1);
+  describe('when selected elements are provided', () => {
+    test('should not call clearCart function when "Clear Cart" button is clicked', () => {
+      renderRoutingComponent(Header, {
+        ...baseProps,
+        selected: [{ foo: 'bar' }]
+      });
+  
+      userEvent.click(screen.getByText('X').closest('button'));
+  
+      expect(baseProps.clearCart).toBeCalledTimes(1);
+    });
   });
 });
