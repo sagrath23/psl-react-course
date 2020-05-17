@@ -13,7 +13,7 @@ export const configureStore = () => {
     composeEnhancers(middlewares)
   );
   // run rootSaga to handle side effects 
-  sagaMiddleware.run(rootSaga)
+  sagaMiddleware.run(rootSaga);
 
-  return store
+  return store;
 }
