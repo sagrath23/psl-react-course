@@ -11,7 +11,7 @@ export function* loadProductList() {
   try {
     const requestResult = yield call(fetchProductList);
 
-    yield put(actions.productListSuccess(requestResult.results));
+    yield put(actions.productListSuccess(requestResult));
   } catch (error) {
     console.error(error);
 
