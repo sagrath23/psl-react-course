@@ -1,6 +1,6 @@
 import { baseUrl } from '../config';
 
-export const fetchProducts = async () => {
+export const fetchProductList = async () => {
   const response = await fetch(`${baseUrl}/products`);
 
   return response.json();

@@ -3,13 +3,13 @@ import {
   takeEvery,
   call
 } from 'redux-saga/effects';
-import { listComics } from '../services';
+import { fetchProductList } from '../services';
 import { actions } from '../store/domains';
 
 
-export function* loadProductList({ payload: { limit, offset }}) {
+export function* loadProductList() {
   try {
-    const requestResult = yield call(listComics, limit, offset);
+    const requestResult = yield call(fetchProductList);
 
     yield put(actions.productListSuccess(requestResult.results));
   } catch (error) {
