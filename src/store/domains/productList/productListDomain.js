@@ -40,7 +40,7 @@ export const reducer = handleActions({
       isLoading: false
     }
   })
-});
+}, initialState);
 
 export const actions = {
   productListRequest,

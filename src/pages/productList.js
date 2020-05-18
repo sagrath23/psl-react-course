@@ -1,5 +1,8 @@
 import React from 'react';
+import { ProductListTable } from '../components/ProductListTable';
 
 export const ProductList = () => (
-  <div>Product List</div>
+  <div>
+    <ProductListTable />
+  </div>
 );
