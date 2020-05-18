@@ -1,7 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './domains';
-import rootSaga from '../sagas';
+import { rootReducer } from './domains';
+import { rootSaga } from '../sagas';
 
 export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
