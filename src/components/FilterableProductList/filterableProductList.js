@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { ProductListTable } from '../ProductListTable';
 import { useDispatch, useSelector } from 'react-redux';
+import { Table } from '../basic/Table';
 import { groupedProductListSelector } from '../../selectors';
 import { actions } from '../../store/domains';
 import { FilterContext } from '../../pages';
@@ -37,7 +37,7 @@ export const FilterableProductList = () => {
   return (
     <div>
       <SearchBar />
-      <ProductListTable groupedProducts={filteredProducts} />
+      <Table groupedProducts={filteredProducts} />
     </div>
   );
 }; 
