@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const ProductListTable = ({ productList }) => (
-  <div>{productList.map((item) => <span>{item.name}</span>)}</div>
-);
+export const ProductListTable = ({ groupedProducts }) => {
+  for (let category in groupedProducts) {
+    console.log(category);
+  }
+
+  return (<div>Here</div>)
+};
 
 ProductListTable.propTypes = {
   productList: PropTypes.arrayOf(PropTypes.shape({
