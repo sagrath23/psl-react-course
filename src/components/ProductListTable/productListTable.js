@@ -1,18 +1,16 @@
-import React, { useEffect, useContext } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { productListSelector } from '../../selectors';
-import { actions } from '../../store/domains';
-import { FilterContext } from '../../pages';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export const ProductListTable = () => {
-  const dispatch = useDispatch();
-  const list = useSelector(productListSelector);
-  const { filterContext: { inStock } } = useContext(FilterContext);
-  const filteredList = inStock ? list.filter((item) => item.stocked === inStock) : list;
+export const ProductListTable = ({ productList }) => (
+  <div>{productList.map((item) => <span>{item.name}</span>)}</div>
+);
 
-  useEffect(() => {
-    dispatch(actions.productListRequest());
-  }, [dispatch]);
+ProductListTable.propTypes = {
+  productList: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string
+  }))
+};
 
-  return (<div>{filteredList.map((item) => <span>{item.name}</span>)}</div>)
+ProductListTable.defaultProps = {
+  productList: []
 };
