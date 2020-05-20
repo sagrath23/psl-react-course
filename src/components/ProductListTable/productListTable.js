@@ -7,11 +7,12 @@ import { FilterContext } from '../../pages';
 export const ProductListTable = () => {
   const dispatch = useDispatch();
   const list = useSelector(productListSelector);
-  const context = useContext(FilterContext);
+  const { filterContext: { inStock } } = useContext(FilterContext);
+  const filteredList = inStock ? list.filter((item) => item.stocked === inStock) : list;
 
   useEffect(() => {
     dispatch(actions.productListRequest());
   }, [dispatch]);
 
-  return (<div>Table goes here</div>)
+  return (<div>{filteredList.map((item) => <span>{item.name}</span>)}</div>)
 };
