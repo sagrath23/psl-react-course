@@ -6,10 +6,12 @@ export const initialState = {
 
 const {
   addProductToCart,
-  removeProductFromCart
+  removeProductFromCart,
+  clearCart
 } = createActions({
   ADD_PRODUCT_TO_CART: (productName) => ({ productName }),
-  REMOVE_PRODUCT_FROM_CART: (productName) => ({ productName })
+  REMOVE_PRODUCT_FROM_CART: (productName) => ({ productName }),
+  CLEAR_CART: undefined
 });
 
 export const reducer = handleActions({
@@ -20,10 +22,15 @@ export const reducer = handleActions({
   [removeProductFromCart]: (state, { payload: { productName }}) => ({
     ...state,
     list: state.list.filter((item) => item !== productName)
+  }),
+  [clearCart]: (state) => ({
+    ...state,
+    list: []
   })
 }, initialState);
 
 export const actions = {
   addProductToCart,
+  clearCart,
   removeProductFromCart
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Cart, ProductDetail, ProductList } from '../pages';
-import { Header } from '../components/basic/Header';
+import { CartHeader } from '../components/CartHeader';
 
 export const Layout = () => (
   <>
-    <Header />
+    <CartHeader />
     <Switch>
       <Route path="/cart" component={Cart} />
       <Route path="/products/:productId" component={ProductDetail} />

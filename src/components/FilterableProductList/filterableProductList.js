@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table } from '../basic/Table';
-import { groupedProductListSelector } from '../../selectors';
+import { groupedProductListSelector } from '../../store/selectors';
 import { actions } from '../../store/domains';
 import { FilterContext } from '../../pages';
 import { SearchBar } from '../SearchBar';

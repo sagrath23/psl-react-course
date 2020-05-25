@@ -5,10 +5,12 @@ import MUITableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Checkbox from '@material-ui/core/Checkbox';
 import styled from 'styled-components';
-import { cartSelector } from '../../../selectors';
+import { cartSelector } from '../../../store/selectors';
 import { actions } from '../../../store/domains'; 
 
 export const TableRow = ({ product }) => {
+  // TODO: this should be a injected component, to separate 
+  // table component from redux interaction
   const dispatch = useDispatch();
   const selectedProducts = useSelector(cartSelector);
   const selected = selectedProducts.includes(product.name)
@@ -18,8 +20,6 @@ export const TableRow = ({ product }) => {
   `;
   const toggleProductSelection = () =>{
     const actionToDispatch = selected ? actions.removeProductFromCart : actions.addProductToCart;
-
-    console.log('here');
 
     dispatch(actionToDispatch(product.name));
   };
