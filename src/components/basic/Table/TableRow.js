@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import Checkbox from '@material-ui/core/Checkbox';
 import styled from 'styled-components';
 import { cartSelector } from '../../../selectors';
+import { actions } from '../../../store/domains'; 
 
 export const TableRow = ({ product }) => {
   const dispatch = useDispatch();
@@ -15,9 +16,14 @@ export const TableRow = ({ product }) => {
     color: ${!product.stocked ? "#aa00ff" : "inherit"};
     font-style: ${!product.stocked ? "italic" : "normal"};
   `;
+  const toggleProductSelection = () =>{
+    const actionToDispatch = selected ? actions.removeProductFromCart : actions.addProductToCart;
 
-  // onChange={() => selected ? onUnselect(product) : onSelect(product)}
-  
+    console.log('here');
+
+    dispatch(actionToDispatch(product.name));
+  };
+
   return (
     <MUITableRow key={product.name}>
       <TableCell className="row-padding" component="td" scope="row" padding="none">
@@ -25,6 +31,7 @@ export const TableRow = ({ product }) => {
           checked={selected}
           color="primary"
           disabled={!product.stocked}
+          onChange={toggleProductSelection}
         />
       </TableCell>
       <TableCell className="row-padding" component="td" scope="row" padding="none">
