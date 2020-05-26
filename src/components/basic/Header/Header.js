@@ -58,7 +58,7 @@ export const Header = ({ selected, clearCart }) =>  {
               </StyledLink>
             </Typography>
             <Button disabled={shouldDisableCartAccess} variant="outlined" className={classes.cart} >
-              <StyledLink classes={classes} to="/products/cart">
+              <StyledLink classes={classes} to="/cart">
                 <b className={classes.counter}>{selected.length}</b>
                 <span className={classes.text}>products in the cart</span>
               </StyledLink>
