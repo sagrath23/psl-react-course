@@ -8,16 +8,22 @@ export const initialState = {
 };
 
 const {
+  addNewProduct,
   productListRequest,
   productListSuccess,
   productListFailed
 } = createActions({
+  ADD_NEW_PRODUCT: (product) => ({ product }),
   PRODUCT_LIST_REQUEST: undefined,
   PRODUCT_LIST_SUCCESS: (list) => ({ list }),
   PRODUCT_LIST_FAILED: undefined
 });
 
 export const reducer = handleActions({
+  [addNewProduct]: (state, { payload: { product }}) => ({
+    ...state,
+    list: [...state.list, product]
+  }),
   [productListRequest]: (state) => ({
     ...state,
     ui: {
@@ -43,6 +49,7 @@ export const reducer = handleActions({
 }, initialState);
 
 export const actions = {
+  addNewProduct,
   productListRequest,
   productListSuccess,
   productListFailed
