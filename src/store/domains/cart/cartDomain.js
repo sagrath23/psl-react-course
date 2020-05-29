@@ -9,19 +9,19 @@ const {
   removeProductFromCart,
   clearCart
 } = createActions({
-  ADD_PRODUCT_TO_CART: (productName) => ({ productName }),
-  REMOVE_PRODUCT_FROM_CART: (productName) => ({ productName }),
+  ADD_PRODUCT_TO_CART: (product) => ({ product }),
+  REMOVE_PRODUCT_FROM_CART: (product) => ({ product }),
   CLEAR_CART: undefined
 });
 
 export const reducer = handleActions({
-  [addProductToCart]: (state, { payload: { productName }}) => ({
+  [addProductToCart]: (state, { payload: { product }}) => ({
     ...state,
-    list: [...state.list, productName]
+    list: [...state.list, product]
   }),
-  [removeProductFromCart]: (state, { payload: { productName }}) => ({
+  [removeProductFromCart]: (state, { payload: { product }}) => ({
     ...state,
-    list: state.list.filter((item) => item !== productName)
+    list: state.list.filter((item) => item.name !== product.name)
   }),
   [clearCart]: (state) => ({
     ...state,

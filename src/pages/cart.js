@@ -1,5 +1,9 @@
 import React from 'react';
+import { CartDetail } from '../components/CartDetail';
 
 export const Cart = () => (
-  <div>Cart</div>
+  <div>
+    <h1>Cart</h1>
+    <CartDetail />
+  </div>
 );

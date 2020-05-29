@@ -13,7 +13,7 @@ export const TableRow = ({ product }) => {
   // table component from redux interaction
   const dispatch = useDispatch();
   const selectedProducts = useSelector(cartSelector);
-  const selected = selectedProducts.includes(product.name)
+  const selected = selectedProducts.find((selectedProduct) => product.name === selectedProduct.name);
   const ColorSpan = styled.span`
     color: ${!product.stocked ? "#aa00ff" : "inherit"};
     font-style: ${!product.stocked ? "italic" : "normal"};
@@ -21,7 +21,7 @@ export const TableRow = ({ product }) => {
   const toggleProductSelection = () =>{
     const actionToDispatch = selected ? actions.removeProductFromCart : actions.addProductToCart;
 
-    dispatch(actionToDispatch(product.name));
+    dispatch(actionToDispatch(product));
   };
 
   return (
