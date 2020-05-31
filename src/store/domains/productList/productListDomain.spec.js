@@ -38,4 +38,10 @@ describe('productListDomain', () => {
       });
     });
   });
+
+  describe('reducer', () => {
+    test('should return the same state if a valid action is not provided', () => {
+      expect(reducer(initialState, { type: 'random action' })).toEqual(initialState);
+    });
+  });
 });
