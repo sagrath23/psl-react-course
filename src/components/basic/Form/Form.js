@@ -6,10 +6,16 @@ import TextField from '@material-ui/core/TextField';
 
 export const Form = ({ confirmAction }) => {
   const [product, setProduct] = useState({ name: 'Zonas', price: '$100', category: 'Sporting Goods' });
+  const setName = (event) => {
+    setProduct({
+      ...product,
+      name: event.target.value
+    });
+  } 
 
   return (
     <FormControl>
-      <TextField id="standard-basic" label="Name" />
+      <TextField id="standard-basic" label="Name" onChange={setName} />
       <Button onClick={() => confirmAction(product)} variant="contained" color="primary">
         Add
       </Button>
