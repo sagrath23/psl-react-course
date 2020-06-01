@@ -63,6 +63,11 @@ export const Header = ({ selected, clearCart }) =>  {
                 <span className={classes.text}>products in the cart</span>
               </StyledLink>
             </Button>
+            <Button variant="outlined" className={classes.cart} >
+              <StyledLink classes={classes} to="/add-product">
+                <span className={classes.text}>add product</span>
+              </StyledLink>
+            </Button>
             <Button
               disabled={shouldDisableCartAccess}
               variant="outlined"
