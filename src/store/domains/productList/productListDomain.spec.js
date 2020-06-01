@@ -40,8 +40,47 @@ describe('productListDomain', () => {
   });
 
   describe('reducer', () => {
+    const newProduct = { name: 'test-product' };
+    const list = [newProduct]
+
     test('should return the same state if a valid action is not provided', () => {
       expect(reducer(initialState, { type: 'random action' })).toEqual(initialState);
+    });
+
+    test(`should return the proper state when ${[actions.addNewProduct]} is provided`, () => {
+      const expectedState = {
+        ...initialState,
+        list
+      };
+
+      expect(reducer(initialState, actions.addNewProduct(newProduct))).toEqual(expectedState);
+    });
+
+    test(`should return the proper state when ${[actions.productListRequest]} is provided`, () => {
+      const expectedState = {
+        ...initialState,
+        ui: {
+          isLoading: true
+        }
+      };
+
+      expect(reducer(initialState, actions.productListRequest())).toEqual(expectedState);
+    });
+
+    test(`should return the proper state when ${[actions.productListFailed]} is provided`, () => {
+      const expectedState = {
+        ...initialState,
+        ui: {
+          isLoading: false
+        }
+      };
+
+      expect(reducer({
+        ...initialState,
+        ui: {
+          isLoading: true
+        }
+      }, actions.productListFailed())).toEqual(expectedState);
     });
   });
 });
