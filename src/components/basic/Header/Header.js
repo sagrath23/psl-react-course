@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,7 +8,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { Button } from '@material-ui/core';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Button from '@material-ui/core/Button';
 
 const styles = {
   appBar: {
@@ -43,7 +46,7 @@ const StyledLink = styled(Link)`
     color: black;
   }`;
 
-export const Header = ({ selected, clearCart }) =>  {
+export const Header = ({ isOpenSidebar, menuClickHandler, selected, clearCart }) =>  {
     const classes = makeStyles(styles)();
     const shouldDisableCartAccess = selected.length === 0;
 
@@ -52,6 +55,17 @@ export const Header = ({ selected, clearCart }) =>  {
         <CssBaseline />
         <AppBar position="sticky" color="default" className={classes.appBar}>
           <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={menuClickHandler}
+              edge="start"
+              className={clsx(classes.menuButton, {
+                [classes.hide]: isOpenSidebar,
+              })}
+            >
+              <MenuIcon />
+            </IconButton>
             <Typography variant="h5" color="primary" noWrap className={classes.toolbarTitle}>
               <StyledLink classes={classes} to="/">
                 <b >React</b>  Products Store
