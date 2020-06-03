@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+// TODO: move this to a config file or something common for all the app
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   drawer: {
