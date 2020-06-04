@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const CartSidebar = () => {
-  const { isSidebarOpen, toggleSidebar } = useContext(PageContext);
+  const { pageContext: { isSidebarOpen, toggleSidebar } } = useContext(PageContext);
   const theme = useTheme();
   const classes = useStyles(theme);
   const handleDrawerClose = () => toggleSidebar(!isSidebarOpen);

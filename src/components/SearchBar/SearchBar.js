@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
-import { FilterContext } from '../../pages';
+import { PageContext } from '../../pages';
 
 export const SearchBar = () => {
-  const { filterContext, setFilterContext } = useContext(FilterContext);
+  const { filterContext, setFilterContext } = useContext(PageContext);
   const [filterText, setFilterText] = useState(filterContext.productName);
   const [isStockOnly, setIsStockOnly] = useState(filterContext.inStock);
   const filterValueChanged = (event) => {

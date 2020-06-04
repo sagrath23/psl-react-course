@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table } from '../basic/Table';
 import { groupedProductListSelector } from '../../store/selectors';
 import { actions } from '../../store/domains';
-import { FilterContext } from '../../pages';
+import { PageContext } from '../../pages';
 import { SearchBar } from '../SearchBar';
 
 export const FilterableProductList = () => {
   const dispatch = useDispatch();
   const groupedProducts = useSelector(groupedProductListSelector);
-  const { filterContext: { inStock, productName } } = useContext(FilterContext);
+  const { filterContext: { inStock, productName } } = useContext(PageContext);
 
   useEffect(() => {
     dispatch(actions.productListRequest());

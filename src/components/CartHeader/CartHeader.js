@@ -7,7 +7,7 @@ import { actions } from '../../store/domains';
 
 export const CartHeader = () => {
   const dispatch = useDispatch();
-  const { isSidebarOpen, toggleSidebar } = useContext(PageContext);
+  const { pageContext: { isSidebarOpen, toggleSidebar } } = useContext(PageContext);
   const list = useSelector(cartSelector);
   const clearCart = () => {
     dispatch(actions.clearCart())
