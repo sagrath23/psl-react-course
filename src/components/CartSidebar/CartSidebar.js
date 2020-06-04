@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -13,6 +13,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { PageContext } from '../../pages';
 
 // TODO: move this to a config file or something common for all the app
 const drawerWidth = 240;
@@ -39,10 +40,19 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(7) + 1,
     },
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
   }
 }));
 
-export const CartSidebar = ({ isSidebarOpen, toggleSidebar }) => {
+export const CartSidebar = () => {
+  const { isSidebarOpen, toggleSidebar } = useContext(PageContext);
   const theme = useTheme();
   const classes = useStyles(theme);
   const handleDrawerClose = () => toggleSidebar(!isSidebarOpen);
@@ -86,4 +96,14 @@ export const CartSidebar = ({ isSidebarOpen, toggleSidebar }) => {
       </List>
     </Drawer>
   );
+};
+
+CartSidebar.propTypes = {
+  isSidebarOpen: PropTypes.bool,
+  toggleSidebar: PropTypes.func
+};
+
+CartSidebar.defaultProps = {
+  isSidebarOpen: false,
+  toggleSidebar: () => {}
 };

@@ -31,27 +31,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const styles = {
-  appBar: {
-    position: 'relative',
-    backgroundColor: '#18161B'
-  },
-  toolbarTitle: {
-    flex: 1,
-    color: '#61DBFB !important'
-  },
-  cart: {
-    backgroundColor: '#fefefe !important',
-    marginLeft: 15,
-  },
-  counter: {
-    fontSize: 20
-  },
-  text: {
-    marginLeft: 15
-  }
-}
-
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: #61dafb;
@@ -65,7 +44,7 @@ const StyledLink = styled(Link)`
     color: black;
   }`;
 
-export const Header = ({ isOpenSidebar, menuClickHandler, selected, clearCart }) =>  {
+export const Header = ({ isSidebarOpen, menuClickHandler, selected, clearCart }) =>  {
   const theme = useTheme();
   const classes = useStyles(theme);
   const shouldDisableCartAccess = selected.length === 0;
@@ -73,7 +52,9 @@ export const Header = ({ isOpenSidebar, menuClickHandler, selected, clearCart })
   return (
     <>
       <CssBaseline />
-      <AppBar position="fixed" color="default" className={classes.appBar}>
+      <AppBar position="fixed" color="default" className={clsx(classes.appBar, {
+          [classes.appBarShift]: isSidebarOpen,
+        })}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -81,7 +62,7 @@ export const Header = ({ isOpenSidebar, menuClickHandler, selected, clearCart })
             onClick={menuClickHandler}
             edge="start"
             className={clsx(classes.menuButton, {
-              [classes.hide]: isOpenSidebar,
+              [classes.hide]: isSidebarOpen,
             })}
           >
             <MenuIcon />

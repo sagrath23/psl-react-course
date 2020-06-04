@@ -1,40 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { PageContext } from '../../pages';
 import { Header } from '../basic/Header';
 import { cartSelector } from '../../store/selectors';
 import { actions } from '../../store/domains';
 
-export const CartHeader = ({ isOpenSidebar, toggleSidebar }) => {
+export const CartHeader = () => {
   const dispatch = useDispatch();
+  const { isSidebarOpen, toggleSidebar } = useContext(PageContext);
   const list = useSelector(cartSelector);
   const clearCart = () => {
     dispatch(actions.clearCart())
   };
-  const handleMenuButtonClick = () => toggleSidebar(!isOpenSidebar);
-  const headerOptions = [(
-    <IconButton
-      color="inherit"
-      aria-label="open drawer"
-      edge="start"
-    >
-      <MenuIcon />
-    </IconButton>
-  )];
+  const handleMenuButtonClick = () => toggleSidebar(!isSidebarOpen);
 
   return (
-    <Header isOpenSidebar={isOpenSidebar} menuClickHandler={handleMenuButtonClick} selected={list} clearCart={clearCart} />
+    <Header isSidebarOpen={isSidebarOpen} menuClickHandler={handleMenuButtonClick} selected={list} clearCart={clearCart} />
   );
-};
-
-CartHeader.propTypes = {
-  isOpenSidebar: PropTypes.bool,
-  toggleSidebar: PropTypes.func
-};
-
-CartHeader.defaultProps = {
-  isOpenSidebar: false,
-  toggleSidebar: () => {}
 };
