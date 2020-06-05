@@ -8,16 +8,17 @@ import styled from 'styled-components';
 import { cartSelector } from '../../../store/selectors';
 import { actions } from '../../../store/domains'; 
 
+const ColorSpan = styled.span`
+    color: ${(props) => !props.stocked ? "#aa00ff" : "inherit"};
+    font-style: ${(props) => !props.stocked ? "italic" : "normal"};
+  `;
+
 export const TableRow = ({ product }) => {
   // TODO: this should be a injected component, to separate 
   // table component from redux interaction
   const dispatch = useDispatch();
   const selectedProducts = useSelector(cartSelector);
   const selected = selectedProducts.find((selectedProduct) => product.name === selectedProduct.name);
-  const ColorSpan = styled.span`
-    color: ${!product.stocked ? "#aa00ff" : "inherit"};
-    font-style: ${!product.stocked ? "italic" : "normal"};
-  `;
   const toggleProductSelection = () =>{
     const actionToDispatch = selected ? actions.removeProductFromCart : actions.addProductToCart;
 
@@ -35,10 +36,10 @@ export const TableRow = ({ product }) => {
         />
       </TableCell>
       <TableCell className="row-padding" component="td" scope="row" padding="none">
-        <ColorSpan>{product.name}</ColorSpan>
+        <ColorSpan stocked={product.stocked}>{product.name}</ColorSpan>
       </TableCell>
       <TableCell className="row-padding" component="td" scope="row" padding="none">
-        <ColorSpan>{product.price}</ColorSpan>
+        <ColorSpan stocked={product.stocked}>{product.price}</ColorSpan>
       </TableCell>
     </MUITableRow>
   );
@@ -48,7 +49,7 @@ TableRow.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number,
     category: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
     stocked: PropTypes.bool

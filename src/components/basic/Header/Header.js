@@ -10,7 +10,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -44,10 +43,9 @@ const StyledLink = styled(Link)`
     color: black;
   }`;
 
-export const Header = ({ isSidebarOpen, menuClickHandler, selected, clearCart }) =>  {
+export const Header = ({ children, isSidebarOpen, menuClickHandler }) =>  {
   const theme = useTheme();
   const classes = useStyles(theme);
-  const shouldDisableCartAccess = selected.length === 0;
 
   return (
     <>
@@ -72,25 +70,7 @@ export const Header = ({ isSidebarOpen, menuClickHandler, selected, clearCart })
               <b >React</b>  Products Store
             </StyledLink>
           </Typography>
-          <Button disabled={shouldDisableCartAccess} variant="outlined" className={classes.cart} >
-            <StyledLink classes={classes} to="/cart">
-              <b className={classes.counter}>{selected.length}</b>
-              <span className={classes.text}>products in the cart</span>
-            </StyledLink>
-          </Button>
-          <Button variant="outlined" className={classes.cart} >
-            <StyledLink classes={classes} to="/add-product">
-              <span className={classes.text}>add product</span>
-            </StyledLink>
-          </Button>
-          <Button
-            disabled={shouldDisableCartAccess}
-            variant="outlined"
-            className={classes.cart}
-            onClick={clearCart}
-          >
-            <b className={classes.counter}>X</b>
-          </Button>
+          {children}
         </Toolbar>
       </AppBar>
     </>

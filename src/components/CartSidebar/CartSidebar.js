@@ -12,7 +12,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AddIcon from '@material-ui/icons/Add';
-import CloseIcon from '@material-ui/icons/Close';
+import RemoveShoppingCartIcon from '@material-ui/icons/RemoveShoppingCart';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
@@ -90,7 +90,7 @@ export const CartSidebar = () => {
           <ListItemText primary="Shopping Cart" />
         </ListItem>
         <ListItem button key="clear-button">
-          <ListItemIcon><CloseIcon /></ListItemIcon>
+          <ListItemIcon><RemoveShoppingCartIcon /></ListItemIcon>
           <ListItemText primary="Clear Cart" />
         </ListItem>
       </List>

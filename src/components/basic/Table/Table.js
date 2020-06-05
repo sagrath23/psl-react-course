@@ -14,8 +14,8 @@ const renderProductsRows = (groupedProducts) => {
     items.push((
       <>
         <TableCategoryRow name={category} />
-        {groupedProducts[category].map((product) => (
-          <TableRow product={product} />
+        {groupedProducts[category].map((product, index) => (
+          <TableRow key={`product-${product.id}-${index}`} product={product} />
         ))}
       </>
     ));
