@@ -30,7 +30,7 @@ export const Table = ({ groupedProducts }) => {
     <MUITable>
       <TableHead>
         <TableRow>
-          <TableCell></TableCell>
+          <TableCell>Select</TableCell>
           <TableCell>Name</TableCell>
           <TableCell>Price</TableCell>
         </TableRow>

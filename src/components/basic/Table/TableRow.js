@@ -18,9 +18,10 @@ export const TableRow = ({ product }) => {
   // table component from redux interaction
   const dispatch = useDispatch();
   const selectedProducts = useSelector(cartSelector);
-  const selected = selectedProducts.find((selectedProduct) => product.name === selectedProduct.name);
+  const checked = selectedProducts.find((selectedProduct) => product.name === selectedProduct.name) !== undefined;
+
   const toggleProductSelection = () =>{
-    const actionToDispatch = selected ? actions.removeProductFromCart : actions.addProductToCart;
+    const actionToDispatch = checked ? actions.removeProductFromCart : actions.addProductToCart;
 
     dispatch(actionToDispatch(product));
   };
@@ -29,7 +30,7 @@ export const TableRow = ({ product }) => {
     <MUITableRow key={product.name}>
       <TableCell className="row-padding" component="td" scope="row" padding="none">
         <Checkbox
-          checked={selected}
+          checked={checked}
           color="primary"
           disabled={!product.stocked}
           onChange={toggleProductSelection}
