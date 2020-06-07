@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
@@ -70,7 +70,7 @@ export const Header = ({ children, isSidebarOpen, menuClickHandler }) =>  {
               <b >React</b>  Products Store
             </StyledLink>
           </Typography>
-          {children}
+          {Children.map(children, (node, index) => <Fragment key={`header-children-${index}`}>{node}</Fragment>)}
         </Toolbar>
       </AppBar>
     </>

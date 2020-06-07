@@ -1,42 +1,38 @@
+import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import { renderRoutingComponent } from '../../../utils/tests';
 import { Header } from './Header';
 
 describe('Header component', () => {
+  const menuClickHandlerMock = jest.fn();
   const baseProps = {
-    selected: [],
-    clearCart: jest.fn()
-  }
+    children: [],
+    isSidebarOpen: false,
+    menuClickHandler: menuClickHandlerMock
+  };
 
-  describe('when no selected elements are provided', () => {
-    test('should display the correct number of selected items', () => {
-      renderRoutingComponent(Header, baseProps);
-  
-      const counterElement = screen.getByText('0');
-  
-      expect(counterElement).toBeInTheDocument();
-    });
+  test('should render with default props', () => {
+    renderRoutingComponent(Header, {});
 
-    test('should not call clearCart function when "Clear Cart" button is clicked', () => {
-      renderRoutingComponent(Header, baseProps);
-  
-      userEvent.click(screen.getByText('X').closest('button'));
-  
-      expect(baseProps.clearCart).toBeCalledTimes(0);
-    });
+    expect(screen.getByText('React')).toBeDefined();
   });
 
-  describe('when selected elements are provided', () => {
-    test('should not call clearCart function when "Clear Cart" button is clicked', () => {
-      renderRoutingComponent(Header, {
-        ...baseProps,
-        selected: [{ foo: 'bar' }]
-      });
-  
-      userEvent.click(screen.getByText('X').closest('button'));
-  
-      expect(baseProps.clearCart).toBeCalledTimes(1);
+  test('should call passed function when clicks over menu icon', () => {
+    renderRoutingComponent(Header, baseProps);
+
+    userEvent.click(screen.getByLabelText('open drawer'));
+
+    expect(menuClickHandlerMock).toBeCalledTimes(1);
+  });
+
+  test('should render with children elements', () => {
+    const children = <div>Children</div>;
+    renderRoutingComponent(Header, {
+      ...baseProps,
+      children: [children]
     });
+
+    expect(screen.getByText('Children')).toBeDefined();
   });
 });
