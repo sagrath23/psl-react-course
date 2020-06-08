@@ -21,3 +21,5 @@ export const groupedProductListSelector = createSelector(productListSelector, (l
       item
     ]
   }), {}));
+
+export const productCategoriesSelector = createSelector(groupedProductListSelector, (groups) => Object.keys(groups));

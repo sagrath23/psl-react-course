@@ -4,7 +4,7 @@ A brief course to show the new features in React v. 16
 
 ## TODO
 
-- [ ] Include "Add product" functionality (include components).
+- [X] Include "Add product" functionality (include components).
 - [X] Add route to access this page.
 - [ ] Add route (and page with components) to do "checkout". In this page, user can increase or remove items from his order
 

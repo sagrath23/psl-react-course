@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { Childre, useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
 
-export const Form = ({ confirmAction }) => {
+export const Form = ({ children, confirmAction }) => {
   const [product, setProduct] = useState({});
   const setName = (event) => {
     setProduct({
@@ -30,9 +32,23 @@ export const Form = ({ confirmAction }) => {
 
   return (
     <FormControl>
+      {children}
       <TextField id="product-name" label="Name" onChange={setName} />
       <TextField id="product-description" label="Description" multiline onChange={setDescription} />
       <TextField id="product-price" label="Price" onChange={setPrice} type="number"/>
+      <FormControlLabel control={
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={product.category}
+          onChange={() => {}}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>}
+        label="Category"
+      />
       <FormControlLabel
         control={
           <Switch

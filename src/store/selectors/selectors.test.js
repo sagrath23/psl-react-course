@@ -59,4 +59,21 @@ describe('selectors tests', () => {
       });
     });
   });
+
+  describe('productCategoriesSelector', () => {
+    test('should return the expected value', () => {
+      const list = [
+        { id: '1', category: 'cat-1' },
+        { id: '2', category: 'cat-2' },
+        { id: '3', category: 'cat-1' }
+      ];
+      const state = {
+        productList: {
+          list
+        }
+      };
+
+      expect(selectors.productCategoriesSelector(state)).toEqual(['cat-1', 'cat-2']);
+    });
+  });
 });
