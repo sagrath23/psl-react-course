@@ -6,7 +6,7 @@ A brief course to show the new features in React v. 16
 
 - [X] Include "Add product" functionality (include components).
 - [X] Add route to access this page.
-- [ ] Add route (and page with components) to do "checkout". In this page, user can increase or remove items from his order
+- [X] Add route (and page with components) to do "checkout". In this page, user can increase or remove items from his order
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
