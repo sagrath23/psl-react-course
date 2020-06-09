@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 
 export const productListSelector = (state) => state.productList.list;
 
+export const isLoadingProductListSelector = (state) => state.productList.ui.isLoading;
+
 export const cartSelector = (state) => state.cart.list;
 
 export const totalSelector = createSelector(
