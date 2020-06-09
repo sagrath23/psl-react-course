@@ -22,29 +22,25 @@ export const ProductDetail = () => {
     if (products.length === 0) {
       dispatch(actions.productListRequest());
     }
-  }, [products])
-
-  const renderProductData = () => {
-    if (isLoading) return (<CircularProgress />)
-    return (
-      <>
-        <div><b>Name:</b> {product.name}</div>
-        <div><b>Price:</b> {product.price}</div>
-        <div><b>Category:</b> {product.category}</div>
-        <div><b>Description:</b> {product.description}</div>
-      </>
-    )
-  };
+  }, [products]);
 
   return (
     <Card style={{ maxWidth: '350px' }}>
-        <CardHeader title="PRODUCT DETAIL" subheader={product.name}>
-        </CardHeader>
-        <img src={`https://fakeimg.pl/350x200/?text=${product.name}&font=lobster`} alt={product.name} />
-        <CardContent>
-          <div>ID: {productId}</div>
-          {renderProductData()}
-        </CardContent>
-      </Card>
+      <CardHeader title="PRODUCT DETAIL" subheader={product.name}>
+      </CardHeader>
+      <img src={`https://fakeimg.pl/350x200/?text=${product.name}&font=lobster`} alt={product.name} />
+      <CardContent>
+        <div>ID: {productId}</div>
+        {isLoading ?
+          <CircularProgress /> :
+          <>
+            <div><b>Name:</b> {product.name}</div>
+            <div><b>Price:</b> {product.price}</div>
+            <div><b>Category:</b> {product.category}</div>
+            <div><b>Description:</b> {product.description}</div>
+          </>
+        }
+      </CardContent>
+    </Card>
   );
 };
