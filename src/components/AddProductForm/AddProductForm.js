@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import FilledInput from '@material-ui/core/FilledInput';
@@ -9,6 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
+import { PageContext } from '../../pages';
 import { Form } from '../basic/Form';
 import { actions } from '../../store/domains';
 import { newProductIdSelector, productCategoriesSelector } from '../../store/selectors';
@@ -17,6 +18,10 @@ export const AddProductForm = () => {
   const dispatch = useDispatch();
   const newProductId = useSelector(newProductIdSelector);
   const categories = useSelector(productCategoriesSelector);
+  const { notificationContext: {
+    isSnackbarOpen,
+    toggleSnackbar
+  }} = useContext(PageContext);
   const [product, setProduct] = useState({ id: newProductId });
   const setProductAttribute = (attribute) => (event) => {
     setProduct({
@@ -24,7 +29,11 @@ export const AddProductForm = () => {
       [attribute]: attribute !== 'stocked' ? event.target.value : event.target.checked 
     });
   };
-  const addProduct = (product) => dispatch(actions.addNewProduct({ ...product, price: `$${product.price}`}));
+  const addProduct = (product) => {
+    dispatch(actions.addNewProduct({ ...product, price: `$${product.price}`}));
+    // show snackbar to notify the result
+    toggleSnackbar(!isSnackbarOpen);
+  };
   // TODO: check how to clear category and stocked elements when clear form is triggered
   const clearForm = () => {
     setProduct({ 

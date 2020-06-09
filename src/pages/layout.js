@@ -1,8 +1,11 @@
 import React, { createContext, useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import CloseIcon from '@material-ui/icons/Close';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
+import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
 import {
   AddProduct,
   Cart,
@@ -12,7 +15,12 @@ import {
 import { CartHeader } from '../components/CartHeader';
 import { CartSidebar } from '../components/CartSidebar';
 
-export const PageContext = createContext({ pageContext: {}, filterContext: {}, setFilterContext: () => {}});
+export const PageContext = createContext({
+  pageContext: {},
+  notificationContext: {},
+  filterContext: {},
+  setFilterContext: () => {}
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +36,7 @@ export const Layout = () => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [isSidebarOpen, toggleSidebar] = useState(false);
+  const [isSnackbarOpen, toggleSnackbar] = useState(false);
   const [filterContext, setFilterContext] = useState({ inStock: false, productName: '' });
   // TODO: improve context structure (moving setFilterContext inside  a proper property)
   const pageContextValue = {
@@ -35,9 +44,14 @@ export const Layout = () => {
       isSidebarOpen,
       toggleSidebar
     },
+    notificationContext: {
+      isSnackbarOpen,
+      toggleSnackbar
+    },
     filterContext,
     setFilterContext
   };
+  const handleSnackbarClose = () => toggleSnackbar(false);
 
   return (
     <div className={classes.root}>
@@ -52,6 +66,23 @@ export const Layout = () => {
             <Route exact path="/add-product" component={AddProduct} />
             <Route exact path="/" component={ProductList} />
           </Switch>
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            open={isSnackbarOpen}
+            autoHideDuration={6000}
+            onClose={handleSnackbarClose}
+            message="Product added to inventory!"
+            action={
+              <React.Fragment>
+                <IconButton size="small" aria-label="close" color="inherit" onClick={handleSnackbarClose}>
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </React.Fragment>
+            }
+          />
         </Container>
       </PageContext.Provider>
     </div>
