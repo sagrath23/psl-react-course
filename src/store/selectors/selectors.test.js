@@ -76,4 +76,21 @@ describe('selectors tests', () => {
       expect(selectors.productCategoriesSelector(state)).toEqual(['cat-1', 'cat-2']);
     });
   });
+
+  describe('newProductIdSelector', () => {
+    test('should return the expected value', () => {
+      const list = [
+        { id: '1' },
+        { id: '2' },
+        { id: '3' }
+      ];
+      const state = {
+        productList: {
+          list
+        }
+      };
+
+      expect(selectors.newProductIdSelector(state)).toEqual(4);
+    });
+  });
 });

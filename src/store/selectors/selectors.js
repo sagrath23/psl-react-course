@@ -23,3 +23,5 @@ export const groupedProductListSelector = createSelector(productListSelector, (l
   }), {}));
 
 export const productCategoriesSelector = createSelector(groupedProductListSelector, (groups) => Object.keys(groups));
+
+export const newProductIdSelector = createSelector(productListSelector, (list) => parseInt(list.map((item) => item.id).sort((a, b) => b - a)[0])+ 1);

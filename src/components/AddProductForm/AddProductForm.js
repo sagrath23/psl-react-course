@@ -11,22 +11,29 @@ import Select from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
 import { Form } from '../basic/Form';
 import { actions } from '../../store/domains';
-import { productCategoriesSelector } from '../../store/selectors';
+import { newProductIdSelector, productCategoriesSelector } from '../../store/selectors';
 
 export const AddProductForm = () => {
   const dispatch = useDispatch();
+  const newProductId = useSelector(newProductIdSelector);
   const categories = useSelector(productCategoriesSelector);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState({ id: newProductId });
   const setProductAttribute = (attribute) => (event) => {
     setProduct({
       ...product,
       [attribute]: attribute !== 'stocked' ? event.target.value : event.target.checked 
     });
   };
-  const addProduct = (product) => dispatch(actions.addNewProduct({ ...product, price: `${product.price}`}));
+  const addProduct = (product) => dispatch(actions.addNewProduct({ ...product, price: `$${product.price}`}));
   // TODO: check how to clear category and stocked elements when clear form is triggered
   const clearForm = () => {
-    setProduct({ name: '', description: '', price: '', stocked: false});
+    setProduct({ 
+      id: newProductId,
+      name: '',
+      description: '',
+      price: '',
+      stocked: false
+    });
   };
 
   return (
