@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import MUITableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -14,7 +15,8 @@ const ColorSpan = styled.span`
   `;
 
 export const TableRow = ({ product }) => {
-  // TODO: this should be a injected component, to separate 
+  // TODO: this should be a injected component, to separate
+  // TODO: Check how to pass route action instead to be hardcoded here
   // table component from redux interaction
   const dispatch = useDispatch();
   const selectedProducts = useSelector(cartSelector);
@@ -37,7 +39,9 @@ export const TableRow = ({ product }) => {
         />
       </TableCell>
       <TableCell className="row-padding" component="td" scope="row" padding="none">
-        <ColorSpan stocked={product.stocked}>{product.name}</ColorSpan>
+        <NavLink to={`/products/${product.id}`}>
+          <ColorSpan stocked={product.stocked}>{product.name}</ColorSpan>
+        </NavLink>
       </TableCell>
       <TableCell className="row-padding" component="td" scope="row" padding="none">
         <ColorSpan stocked={product.stocked}>{product.price}</ColorSpan>
