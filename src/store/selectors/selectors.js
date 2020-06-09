@@ -12,7 +12,7 @@ export const totalSelector = createSelector(
     const price = parseFloat(selectedProduct.price.replace('$', ''));
 
     return acm + price;
-  }, 0)
+  }, 0).toFixed(3)
 );
 
 export const groupedProductListSelector = createSelector(productListSelector, (list) => list.reduce(
